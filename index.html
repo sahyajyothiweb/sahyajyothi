@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SAHYAYOTHI LEARNING HUB</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+
+    header {
+      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .header-img {
+      height: 70px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+    .header-img:hover {
+      transform: scale(1.1);
+    }
+
+    .header-text {
+      flex-grow: 1;
+      text-align: center;
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .button-container {
+      margin: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .video-container {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    iframe {
+      width: 560px;
+      height: 315px;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="images/left.png" alt="Left Image" class="header-img">
+  <div class="header-text">SAHYAJYOTHI LEARNING HUB DAYWISE</div>
+  <img src="images/right.png" alt="Right Image" class="header-img">
+</header>
+
+<div class="button-container">
+  <button onclick="loadVideos('1')">DAY 1</button>
+  <button onclick="loadVideos('2')">DAY 2</button>
+  <button onclick="loadVideos('3')">DAY 3</button>
+  <button onclick="loadVideos('4')">DAY 4</button>
+  <button onclick="loadVideos('5')">DAY 5</button>
+  <button onclick="loadVideos('6')">DAY 6</button>
+  <button onclick="loadVideos('7')">DAY 7</button>
+  <button onclick="loadVideos('8')">DAY 8</button>
+</div>
+
+<div class="video-container" id="videoContainer">
+  <!-- Two iframes will be dynamically inserted here -->
+</div>
+
+<script>
+  const dayVideos = {
+    "1": [
+      "https://www.youtube.com/embed/dQw4w9WgXcQ",
+      "https://www.youtube.com/embed/oHg5SJYRHA0"
+    ],
+    "2": [
+      "https://www.youtube.com/embed/3JZ_D3ELwOQ",
+      "https://www.youtube.com/embed/2vjPBrBU-TM"
+    ],
+    "3": [
+      "https://www.youtube.com/embed/l482T0yNkeo",
+      "https://www.youtube.com/embed/ZbZSe6N_BXs"
+    ],
+    "4": [
+      "https://www.youtube.com/embed/kXYiU_JCYtU",
+      "https://www.youtube.com/embed/VbfpW0pbvaU"
+    ],
+    "5": [
+      "https://www.youtube.com/embed/hTWKbfoikeg",
+      "https://www.youtube.com/embed/ktvTqknDobU"
+    ],
+    "6": [
+      "https://www.youtube.com/embed/Eh44QPT1mPE",
+      "https://www.youtube.com/embed/L_jWHffIx5E"
+    ],
+    "7": [
+      "https://www.youtube.com/embed/fLexgOxsZu0",
+      "https://www.youtube.com/embed/CevxZvSJLk8"
+    ],
+    "8": [
+      "https://www.youtube.com/embed/tgbNymZ7vqY",
+      "https://www.youtube.com/embed/60ItHLz5WEA"
+    ]
+  };
+
+  function loadVideos(day) {
+    const container = document.getElementById('videoContainer');
+    container.innerHTML = ""; // Clear existing iframes
+    const urls = dayVideos[day];
+
+    urls.forEach(url => {
+      const iframe = document.createElement("iframe");
+      iframe.src = url;
+      iframe.allowFullscreen = true;
+      container.appendChild(iframe);
+    });
+  }
+
+  // Load default (Day 1)
+  loadVideos('1');
+</script>
+
+</body>
+</html>

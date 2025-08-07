@@ -86,7 +86,7 @@
 
 <!-- Step 1: Show First Button -->
 <div class="button-container" id="firstButtonContainer">
-  <button onclick="showMonths()">FIRST</button>
+  <button onclick="showMonths()">ENGLIZONE</button>
 </div>
 
 <!-- Step 2: Show Months -->
@@ -113,7 +113,6 @@
     },
     // Add other months and days here
   };
-
   function showMonths() {
     document.getElementById('firstButtonContainer').style.display = 'none';
     const monthContainer = document.getElementById('monthContainer');
@@ -126,7 +125,6 @@
     });
     monthContainer.style.display = 'flex';
   }
-
   function showDays(month) {
     const dayContainer = document.getElementById('dayContainer');
     dayContainer.innerHTML = '';
@@ -145,7 +143,6 @@
     dayContainer.style.display = 'flex';
     document.getElementById('videoContainer').innerHTML = '';
   }
-
   function loadVideo(url) {
     const container = document.getElementById('videoContainer');
     container.innerHTML = '';
@@ -155,6 +152,5 @@
     container.appendChild(iframe);
   }
 </script>
-
 </body>
 </html>

@@ -99,20 +99,46 @@
 <div class="video-container" id="videoContainer"></div>
 
 <script>
-  // Define months and dummy days
-  const months = ["January", "February", "March", "April", "May", "June", "July", "August"];
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August" , "Septemper"];
 
-  // Define sample video URLs (replace with real data)
   const videoLinks = {
     "January": {
-      "Day 1": "https://www.youtube.com/embed/urHQRBQ9FOk",
-      "Day 2": "https://www.youtube.com/embed/ScMzIvxBSi4"
+      "Day 1": "https://www.youtube.com/watch?v=urHQRBQ9FOk",
+      "Day 2": "https://www.youtube.com/watch?v=ScMzIvxBSi4"
     },
     "February": {
-      "Day 1": "https://www.youtube.com/embed/dQw4w9WgXcQ"
+      "Day 1": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
     },
-    // Add other months and days here
+    "Septemper": {
+      "Day 194": "https://youtube.com/shorts/FqAonDXuYeg?si=hZPNd-VXIHFJcgXz",
+      "Day 195": "https://quizzory.in/id/6877c4f5f6eea4751fa4c9fa",
+      "Day 196": "https://youtu.be/urHQRBQ9FOk?si=XktyKcreSyY7ro7c",
+      "Day 197": "https://form.svhrt.com/687e25b55714352e375e3e6f",
+      "Day 198": "https://form.svhrt.com/6880dcf25714352e3779edf1",
+      "Day 199": "https://youtube.com/shorts/sG0lF9OyFq0",
+      "Day 200": "https://youtube.com/shorts/nQwPjSyRx7w",
+      "Day 201": "https://youtube.com/shorts/XriY_E7YiLs",
+      "Day 202": "https://youtube.com/shorts/n1WwRV9yxuo",
+      "Day 203": "https://youtube.com/shorts/xWsdqvhpUlk",
+      "Day 204": "https://youtube.com/shorts/JSd82Q_WxOY",
+      "Day 205": "https://docs.google.com/forms/d/1rIPmMhk5r4cF91favyPnVRTcFu7sdUqk9ywau1yB_gk/viewform",
+      "Day 206": "https://youtube.com/shorts/3JG2Dv4VqVc",
+      "Day 207": "https://youtube.com/shorts/rglF-UZ5tiY",
+      "Day 208": "https://youtube.com/shorts/4BNi3zOwFDs",
+      "Day 209": "",
+      "Day 210": "",
+      "Day 211": "https://youtube.com/shorts/g4v9xPnvee0",
+      "Day 212": "https://youtube.com/shorts/JUwUQ1Xp18E",
+      "Day 213": "https://youtube.com/shorts/zkv7ZdpD-ZM",
+      "Day 214": "https://youtube.com/shorts/0PEI6SIQOuA",
+      "Day 215": "https://youtube.com/shorts/XVQTMXUTXuI",
+      "Day 216": "https://youtube.com/shorts/j01UlJroa8o",
+      "Day 217": "https://youtube.com/shorts/TIjsCofRxv8",
+      "Day 218": "https://youtube.com/shorts/-ZKkqz-7Pq4",
+      "Day 219": "https://youtube.com/shorts/gHpF6h1Mvsw"
+    }
   };
+
   function showMonths() {
     document.getElementById('firstButtonContainer').style.display = 'none';
     const monthContainer = document.getElementById('monthContainer');
@@ -125,6 +151,7 @@
     });
     monthContainer.style.display = 'flex';
   }
+
   function showDays(month) {
     const dayContainer = document.getElementById('dayContainer');
     dayContainer.innerHTML = '';
@@ -143,13 +170,64 @@
     dayContainer.style.display = 'flex';
     document.getElementById('videoContainer').innerHTML = '';
   }
+
   function loadVideo(url) {
     const container = document.getElementById('videoContainer');
     container.innerHTML = '';
-    const iframe = document.createElement('iframe');
-    iframe.src = url;
-    iframe.allowFullscreen = true;
-    container.appendChild(iframe);
+
+    if (!url) {
+      container.innerHTML = "<p style='color:red;'>No video available for this day.</p>";
+      return;
+    }
+
+    let embedUrl = "";
+
+    // Shorts → embed
+    if (url.includes("youtube.com/shorts/")) {
+      const videoId = url.split("shorts/")[1].split("?")[0];
+      embedUrl = "https://www.youtube.com/embed/" + videoId;
+    }
+    // youtu.be → embed
+    else if (url.includes("youtu.be/")) {
+      const videoId = url.split("youtu.be/")[1].split("?")[0];
+      embedUrl = "https://www.youtube.com/embed/" + videoId;
+    }
+    // normal YouTube
+    else if (url.includes("youtube.com/watch?v=")) {
+      const videoId = new URL(url).searchParams.get("v");
+      embedUrl = "https://www.youtube.com/embed/" + videoId;
+    }
+    // already embed link
+    else if (url.includes("youtube.com/embed/")) {
+      embedUrl = url;
+    }
+    else if (url.includes("docs.google.com/forms/")) {
+      embedUrl = url;
+    }
+    else if (url.includes("form.svhrt.com/")) {
+      embedUrl = url;
+    }
+    else if (url.includes("quizzory.in/")) {
+      embedUrl = url;
+    }
+
+    if (embedUrl) {
+      const iframe = document.createElement('iframe');
+      iframe.src = embedUrl;
+      iframe.allowFullscreen = true;
+      container.appendChild(iframe);
+
+      // add backup link for Shorts
+      if (url.includes("shorts/")) {
+        const link = document.createElement("p");
+        link.innerHTML = `<a href="${url}" target="_blank">🔗 Watch on YouTube</a>`;
+        container.appendChild(link);
+      }
+    // } else {
+    //   // Non-YouTube → open link
+    //   container.innerHTML = `<p><a href="${url}" target="_blank">Open Link</a></p>`;
+    // }
+}
   }
 </script>
 </body>
